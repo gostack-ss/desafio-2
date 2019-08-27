@@ -3,6 +3,7 @@ import User from '../models/user'
 
 class UserController {
   async store(req, res) {
+    /* validando body da requisição */
     const schema = Yup.object().shape({
       name: Yup.string()
         .required()
@@ -21,7 +22,7 @@ class UserController {
     if (userExist) {
       return res.status(409).json({ error: 'User already exist' })
     }
-    console.log('passou')
+
     const user = await User.create(req.body)
     return res.json(user)
   }
